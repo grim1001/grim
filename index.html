@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grim - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0a0a0a, #000000);
+            color: #b19cd9;
+            font-family: 'Fira Mono', monospace;
+            min-height: 100vh;
+        }
+
+        .header {
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid #7b2cbf;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #c77dff;
+            text-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
+        }
+
+
+
+        .hero {
+            text-align: center;
+            padding: 120px 20px 70px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 25px;
+            color: #e0aaff;
+            text-shadow: 0 0 30px rgba(224, 170, 255, 0.6);
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #b19cd9;
+            letter-spacing: 1px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            padding: 0 20px 90px;
+        }
+
+        .btn {
+            border: 2px solid #7b2cbf;
+            background: rgba(123, 44, 191, 0.1);
+            color: #c77dff;
+            padding: 18px 35px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s;
+            cursor: pointer;
+            font-family: 'Fira Mono', monospace;
+            font-size: 14px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(199, 125, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            border-color: #c77dff;
+            box-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .projects {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px 120px;
+        }
+
+        .projects h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #e0aaff;
+            text-shadow: 0 0 25px rgba(224, 170, 255, 0.5);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            border: 1px solid #5a189a;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.05), rgba(90, 24, 154, 0.05));
+            border-radius: 8px;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(199, 125, 255, 0.15) 0%, 
+                transparent 70%);
+            opacity: 0;
+            transition: all 0.8s ease;
+            transform: scale(0);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+            transform: scale(1) rotate(45deg);
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(199, 125, 255, 0.2), 
+                transparent);
+            transition: left 0.7s ease;
+        }
+
+        .project-card:hover::after {
+            left: 200%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(123, 44, 191, 0.4);
+            border-color: #9d4edd;
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card h3 {
+            font-size: 26px;
+            margin-bottom: 18px;
+            color: #e0aaff;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .project-card:hover h3 {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(224, 170, 255, 0.9);
+            transform: translateX(5px);
+        }
+
+        .project-card p {
+            color: #b19cd9;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #9d4edd;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status::before {
+            content: '◆';
+            color: #c77dff;
+            animation: pulse 2.5s infinite;
+            font-size: 16px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.4; 
+                transform: scale(1.2);
+            }
+        }
+
+        .project-card:hover .status::before {
+            animation: pulse 0.6s infinite;
+            color: #ffffff;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            color: #7b2cbf;
+            border-top: 1px solid #5a189a;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px 60px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">GRIM</div>
+    </header>
+
+    <section class="hero">
+        <h1>GRIM</h1>
+        <p>Natro Macro Pattern Developer</p>
+    </section>
+
+    <section class="buttons">
+        <a href="#" class="btn"><span>GitHub<br>grim</span></a>
+        <a href="#" class="btn"><span>Discord<br>grim</span></a>
+    </section>
+
+    <section class="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>natro macro patterns</h3>
+                    <p>Advanced pattern recognition and automation system for optimized macro sequences.</p>
+                    <div class="project-meta">
+                        <span class="status">AutoHotkey</span>
+                        <span>★ 0</span>
+                        <span>Updated: 01/17/2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        © 2026 grim • crafted with purpose
+    </footer>
+</body>
+</html>
