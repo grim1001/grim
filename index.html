@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/"> <!-- FORCE ROOT LOADING -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>grim - Portfolio</title>
@@ -24,6 +22,7 @@
             overflow-x: hidden;
         }
 
+        /* ==== BLURRED BACKGROUND IMAGE ==== */
         body::before {
             content: "";
             position: fixed;
@@ -37,6 +36,7 @@
             z-index: -2;
         }
 
+        /* ==== DARK GLASS OVERLAY ==== */
         body::after {
             content: "";
             position: fixed;
@@ -50,6 +50,9 @@
             background: rgba(10, 10, 10, 0.75);
             border-bottom: 1px solid #7b2cbf;
             padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -85,7 +88,8 @@
             display: flex;
             justify-content: center;
             gap: 25px;
-            padding-bottom: 90px;
+            flex-wrap: wrap;
+            padding: 0 20px 90px;
         }
 
         .btn {
@@ -96,13 +100,38 @@
             text-decoration: none;
             transition: all 0.4s;
             font-size: 14px;
+            position: relative;
+            overflow: hidden;
             backdrop-filter: blur(8px);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(199, 125, 255, 0.25);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn:hover {
             border-color: #c77dff;
             box-shadow: 0 0 25px rgba(199, 125, 255, 0.6);
             transform: translateY(-3px);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
         }
 
         .projects {
@@ -116,6 +145,13 @@
             font-size: 36px;
             margin-bottom: 50px;
             color: #e0aaff;
+            text-shadow: 0 0 25px rgba(224, 170, 255, 0.5);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
         }
 
         .project-card {
@@ -125,12 +161,32 @@
             backdrop-filter: blur(12px);
             border-radius: 8px;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
             transition: all 0.4s ease;
         }
 
         .project-card:hover {
             transform: translateY(-12px);
             box-shadow: 0 20px 45px rgba(123, 44, 191, 0.45);
+            border-color: #9d4edd;
+        }
+
+        .project-card h3 {
+            font-size: 26px;
+            margin-bottom: 18px;
+            color: #e0aaff;
+        }
+
+        .project-card p {
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .project-meta {
+            font-size: 13px;
+            color: #9d4edd;
         }
 
         .footer {
@@ -141,6 +197,22 @@
             border-top: 1px solid #5a189a;
             backdrop-filter: blur(6px);
             background: rgba(10, 10, 20, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px 60px;
+            }
+
+            .btn {
+                width: 90%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -157,17 +229,31 @@
 </section>
 
 <section class="buttons">
-    <a href="https://github.com/grim1001" class="btn">GitHub<br>grim1001</a>
-    <a href="https://discord.com/users/217826834920898560" class="btn">Discord<br>grim</a>
+    <a href="https://github.com/grim1001" class="btn">
+        <span>GitHub<br>grim1001</span>
+    </a>
+
+    <a href="https://discord.com/users/217826834920898560" class="btn">
+        <span>Discord<br>grim</span>
+    </a>
 </section>
 
 <section class="projects">
     <h2>Projects</h2>
-    <div class="project-card"
-         onclick="window.open('https://github.com/grim1001/Natro-Macro-Patterns/tree/main','_blank')">
-        <h3>Natro Macro Patterns</h3>
-        <p>Advanced pattern recognition and automation system for optimized macro sequences.</p>
-        <div class="project-meta">AHKv2 • Updated: 01/17/2026</div>
+
+    <div class="project-grid">
+        <div
+            class="project-card"
+            onclick="window.open('https://github.com/grim1001/Natro-Macro-Patterns/tree/main','_blank')"
+        >
+            <h3>Natro Macro Patterns</h3>
+            <p>
+                Advanced pattern recognition and automation system for optimized macro sequences.
+            </p>
+            <div class="project-meta">
+                AHKv2 • Updated: 01/17/2026
+            </div>
+        </div>
     </div>
 </section>
 
