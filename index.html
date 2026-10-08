@@ -94,6 +94,7 @@
 
         .btn {
             border: 2px solid #7b2cbf;
+            border-radius: 12px; /* rounded corners */
             background: rgba(123, 44, 191, 0.15);
             color: #c77dff;
             padding: 18px 35px;
@@ -193,10 +194,16 @@
             text-align: center;
             padding: 30px;
             font-size: 13px;
-            color: #7b2cbf;
+            color: #e0aaff;
+            text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
             border-top: 1px solid #5a189a;
-            backdrop-filter: blur(6px);
-            background: rgba(10, 10, 20, 0.6);
+            background:
+                linear-gradient(rgba(10, 10, 20, 0.45), rgba(10, 10, 20, 0.45)),
+                url("palm-banner.png");
+            background-size: auto, 160% auto; /* image wider than the banner so there's room to pan */
+            background-position: 0 0, 50% 50%;
+            background-repeat: no-repeat;
+            transition: background-position 0.4s ease-out;
         }
 
         @media (max-width: 768px) {
@@ -261,6 +268,14 @@
     © 2026 grim • crafted with purpose
 </footer>
 
+<script>
+    // Pan the footer image left to right as the mouse moves across the window
+    const footer = document.querySelector('.footer');
+    document.addEventListener('mousemove', (e) => {
+        const percent = (e.clientX / window.innerWidth) * 100;
+        footer.style.backgroundPosition = `0 0, ${percent}% 50%`;
+    });
+</script>
+
 </body>
 </html>
-
